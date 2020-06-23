@@ -13,9 +13,9 @@ RoxygenNote: 6.1.1
 Suggests: 
     testthat (>= 2.1.0)
 Imports: 
-    dplyr
-    Matrix
-    ggplot2
-    SHAPforxgboost
-    pdp
+    dplyr,
+    Matrix,
+    ggplot2,
+    SHAPforxgboost,
+    pdp,
     waterfalls
