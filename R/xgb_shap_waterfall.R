@@ -5,16 +5,12 @@ xgb_shap_waterfall <- function(xgb_model, X_train, name_map = NULL, transpose = 
   #           e.g. c("csmt" = "consumer sentiment") where csmt is one of the columns
   #           if not provided, will use column names. if provided without names, will
   #           map according to order
-  require(ggplot2)
-  require(SHAPforxgboost)
-  require(waterfalls)
-
   if (nrow(X_train) > 1) stop("Can only with 1 observation.")
 
   # X_train might include more variables than xgb_model was trained on
   X_train <- X_train[, xgb_model$feature_names]
 
-  shap_values <- shap.values(xgb_model, X_train)
+  shap_values <- SHAPforxgboost::shap.values(xgb_model, X_train)
   y_hat <- predict(xgb_model, xgb.DMatrix(as.matrix(X_train)))
 
   if (is.null(name_map)) {
@@ -31,7 +27,7 @@ xgb_shap_waterfall <- function(xgb_model, X_train, name_map = NULL, transpose = 
                              label = c("Bias", x_axis_labels))
   waterfall_df$vals <- sapply(waterfall_df$vals, FUN = function(x) round(x, 3))
 
-  plt <- waterfall(waterfall_df, calc_total = TRUE) +
+  plt <- waterfalls::waterfall(waterfall_df, calc_total = TRUE) +
     theme_minimal() +
     ggtitle("SHAP Explainer") +
     ylab(expression("Predicted Value "~hat(y))) +
