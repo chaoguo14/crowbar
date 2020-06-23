@@ -28,7 +28,7 @@ xgb_shap_waterfall <- function(xgb_model, X_train, name_map = NULL, transpose = 
   waterfall_df$vals <- sapply(waterfall_df$vals, FUN = function(x) round(x, 3))
 
   plt <- waterfalls::waterfall(waterfall_df, calc_total = TRUE) +
-    theme_minimal() +
+    ggplot2::theme_minimal() +
     ggtitle("SHAP Explainer") +
     ylab(expression("Predicted Value "~hat(y))) +
     xlab("Explanatory Variables") +
