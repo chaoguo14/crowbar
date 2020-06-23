@@ -29,17 +29,17 @@ xgb_shap_waterfall <- function(xgb_model, X_train, name_map = NULL, transpose = 
 
   plt <- waterfalls::waterfall(waterfall_df, calc_total = TRUE) +
     ggplot2::theme_minimal() +
-    ggtitle("SHAP Explainer") +
-    ylab(expression("Predicted Value "~hat(y))) +
-    xlab("Explanatory Variables") +
-    theme(plot.title = element_text(size = 16, family = "sans"),
+    ggplot2::ggtitle("SHAP Explainer") +
+    ggplot2::ylab(expression("Predicted Value "~hat(y))) +
+    ggplot2::xlab("Explanatory Variables") +
+    ggplot2::theme(plot.title = element_text(size = 16, family = "sans"),
           axis.text.x = element_text(size = 12, family = "sans"),
           axis.title.x.bottom = element_text(size = 14, family = "sans"),
           axis.title.y.left = element_text(size = 14, family = "sans")
     )
 
   if (transpose) {
-    plt <- plt + coord_flip()
+    plt <- plt + ggplot2::coord_flip()
   }
 
   plt
