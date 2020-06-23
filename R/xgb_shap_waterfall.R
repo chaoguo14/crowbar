@@ -1,4 +1,4 @@
-xgboost_shap_waterfall <- function(xgb_model, X_train, name_map = NULL, transpose = FALSE) {
+xgb_shap_waterfall <- function(xgb_model, X_train, name_map = NULL, transpose = FALSE) {
   # name_map: sometimes column names of X_train are difficult to understand.
   #           for example, they might contain abbreviations. name_map is a named
   #           vector to translate those.
