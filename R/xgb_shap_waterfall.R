@@ -23,7 +23,7 @@ xgboost_shap_waterfall <- function(xgb_model, X_train, name_map = NULL, transpos
   }
 
   # Create x-axis label for the plot
-  x_axis_labels <- mapply(FUN = function(x, y) paste(x, y, sep = "\n"),
+  x_axis_labels <- mapply(FUN = function(x, y) paste(x, round(y,3), sep = "\n"),
                           name_map[xgb_model$feature_names], X_train[1, ])
 
   waterfall_df <- data.frame(vals = c(as.numeric(shap_values$BIAS0[1, 1]),
