@@ -28,11 +28,11 @@ xgb_pdp <- function(model_obj, train_df, pred_var, type = "regression",
     mode_to_display <- c(mode)
   }
 
-  q <- ggplot(data = uv %>% filter(Method %in% mode_to_display),
+  q <- ggplot(data = uv[uv[["Method"]] %in% mode_to_display, ],
               aes_string(x = pred_var, y = "yhat", colour = "Method")) +
     geom_line(size = 0.7) +
     geom_point() +
-    geom_rug(data = uv %>% filter(Method == "Quantile"), sides = "b") +
+    geom_rug(data = uv[uv[["Method"]] == "Quantile", ], sides = "b") +
     labs(title = paste("Partial Dependence Plot:", pred_var),
          subtitle = paste0("Trimmed top/bottom", trim*100, "%. ",
                            "Precision ", precision*100, "%.")) +
