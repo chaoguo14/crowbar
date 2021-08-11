@@ -10,8 +10,11 @@ adf_test_summary <- function(df, max_lag = 5, type = "nc") {
   data.frame(
     lapply(df,
            FUN = function(x)
-             purrr::map_dbl(1:5,
-                            function(l) fUnitRoots::adfTest(x, lags = l, type = type)@test$p.value)
+             purrr::map_dbl(1:max_lag,
+                            function(l) tryCatch(
+                              fUnitRoots::adfTest(x, lags = l, type = type)@test$p.value,
+                              error = function(err) NA)
+             )
+           )
     )
-  )
 }
