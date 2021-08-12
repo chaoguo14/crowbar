@@ -14,12 +14,9 @@ adf_test_summary <- function(df, type = "none", p_select = "BIC") {
   cat("p-value< 0.05 implies no unit root exists (i.e. stationary)\n")
   
   data.frame(
-    lapply(df, FUN = function(x)
-      tryCatch(
-        fUnitRoots::adfTest(x,
-                            lags = urca::ur.df(test_ts, type = type, selectlags = p_select)@lags,
-                            type = urca_to_adftest(type))@test$p.value,
-        error = function(err) NA)
-      )
+    lapply(df, FUN = function(x) fUnitRoots::adfTest(x,
+                            lags = urca::ur.df(x, type = type, selectlags = p_select)@lags,
+                            type = urca_to_adftest[type])@test$p.value
     )
+  )
 }
