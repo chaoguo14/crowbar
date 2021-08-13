@@ -2,20 +2,18 @@
 % Please edit documentation in R/adf_test_summary.r
 \name{adf_test_summary}
 \alias{adf_test_summary}
-\title{Run Augmented Dickey--Fuller test for unit roots on all columns of a data frame.}
+\title{Run ADF test for unit roots on all columns of a data frame.}
 \usage{
-adf_test_summary(df, type = "none", p_select = "BIC")
+adf_test_summary(df, p_select = "BIC")
 }
 \arguments{
-\item{type}{Type of test equation. Possible values: "none", "drift" (intercept), "trend" (intercept + linear time trend)}
-
 \item{p_select}{Method for selecting number of lags to include in the test regression. Possible values: "AIC", "BIC"}
 }
 \value{
-A data frame with p-values for each column \eqn{a + b}
+A data frame with 3 rows and ncol(df) columns.
 }
 \description{
-Run Augmented Dickey--Fuller test for unit roots on all columns of a data frame.
+Run ADF test for unit roots on all columns of a data frame.
 }
 \examples{
 # Example 1: We test it on iid white noises and a random walk.
@@ -27,6 +25,5 @@ adf_test_summary(df)
 # Example 2: We test it on a "trend stationary" time series.
 set.seed(10)
 df <- data.frame(trend_s = 0.8 * seq(1:20) + rnorm(20))
-adf_test_summary(df)  # p-value > 0.05, but we are not using the correct test
-adf_test_summary(df, type = "trend")
+adf_test_summary(df)
 }
